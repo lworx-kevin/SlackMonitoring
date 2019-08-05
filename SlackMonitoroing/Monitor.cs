@@ -18,9 +18,6 @@ namespace SlackMonitoroing
             if(warningLevel == TypeOfError.INFORMATIONAL || averageQueryTime == 0)
                 Helpers.WriteToLog(monitor.TypeOfQuery, monitor.Timer);
 
-            if (averageQueryTime == 0)
-                monitor.TypeOfError = TypeOfError.INSUFFICIENTMODELDATA;
-
             PostToSlackAsync(new DbMonitorModel
             {
                 TypeOfError = warningLevel,

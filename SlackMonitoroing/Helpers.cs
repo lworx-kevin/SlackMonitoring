@@ -52,6 +52,8 @@ namespace SlackMonitoroing
 
         public static TypeOfError DegreeOfError(int queryExecution, int averageQueryTime)
         {
+            if (averageQueryTime == 0)
+                return TypeOfError.INSUFFICIENTMODELDATA;
             var info = (1.10 * averageQueryTime);
             var warning = (1.25 * averageQueryTime);
             var error = (1.50 * averageQueryTime);
