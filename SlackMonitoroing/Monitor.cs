@@ -15,8 +15,11 @@ namespace SlackMonitoroing
             var averageQueryTime = Helpers.CheckQueryAverageTime(monitor.TypeOfQuery);
             var warningLevel = Helpers.DegreeOfError(monitor.Timer, averageQueryTime);
 
-            if(warningLevel == TypeOfError.INFORMATIONAL)
+            if(warningLevel == TypeOfError.INFORMATIONAL || averageQueryTime == 0)
                 Helpers.WriteToLog(monitor.TypeOfQuery, monitor.Timer);
+
+            if (averageQueryTime == 0)
+                monitor.TypeOfError = TypeOfError.INSUFFICIENTMODELDATA;
 
             PostToSlackAsync(new DbMonitorModel
             {
@@ -38,7 +41,8 @@ namespace SlackMonitoroing
 
             using (var client = new HttpClient())
             {
-                var result = client.PostAsync(model.SlackWebhookUrl, new StringContent(requestJson, Encoding.UTF8, "application/json")).Result;
+                var result = client.PostAsync(model.SlackWebhookUrl, 
+                    new StringContent(requestJson, Encoding.UTF8, "application/json")).Result;
                 if(result.IsSuccessStatusCode)
                 {
                     var responseContent = result.Content;

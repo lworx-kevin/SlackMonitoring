@@ -16,24 +16,29 @@ namespace SlackMonitoroing
             var lowerQuery = query.ToString().ToLower();
             try
             {
-                var file = System.IO.File.ReadAllLines(Constants.LOG_PATH + lowerQuery + ".txt");
+                var file = File.ReadAllLines(Constants.LOG_PATH + lowerQuery + ".txt");
+
+                if (file.Length < 30)
+                    return 0;
+
                 switch (query)
                 {
                     case TypeOfQuery.INSERT:
                         averageQueryTime = StringArrayToAverage(file);
                         break;
+
                     case TypeOfQuery.DELETE:
                         averageQueryTime = StringArrayToAverage(file);
-
                         break;
+
                     case TypeOfQuery.UPDATE:
                         averageQueryTime = StringArrayToAverage(file);
-
                         break;
+
                     case TypeOfQuery.SELECT:
                         averageQueryTime = StringArrayToAverage(file);
-
                         break;
+
                     default:
                         break;
                 }
@@ -74,20 +79,25 @@ namespace SlackMonitoroing
                 var lowerQuery = query.ToString().ToLower();
                 var file = Constants.LOG_PATH + lowerQuery + ".txt";
                 var timerArray = Environment.NewLine + timer.ToString();
+
                 switch (query)
                 {
                     case TypeOfQuery.INSERT:
-                        File.AppendAllText(file, timerArray);                        
+                        File.AppendAllText(file, timerArray);
                         break;
+
                     case TypeOfQuery.DELETE:
                         File.AppendAllText(file, timerArray);
                         break;
+
                     case TypeOfQuery.UPDATE:
                         File.AppendAllText(file, timerArray);
                         break;
+
                     case TypeOfQuery.SELECT:
                         File.AppendAllText(file, timerArray);
                         break;
+
                     default:
                         break;
                 }

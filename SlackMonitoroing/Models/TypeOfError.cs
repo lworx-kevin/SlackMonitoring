@@ -7,6 +7,6 @@ namespace SlackMonitoroing.Models
     public enum TypeOfError
     {
         INFORMATIONAL, WARNING, ERROR,
-        NONE
+        NONE, INSUFFICIENTMODELDATA
     }
 }
