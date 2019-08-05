@@ -6,7 +6,7 @@ namespace SlackMonitoroing.Models
 {
     public enum TypeOfQuery
     {
-        INSERT, DELETE, UPDATE, SELECT
+        INSERT, DELETE, UPDATE, SELECT, WRITEFAILED
     }
 
 }

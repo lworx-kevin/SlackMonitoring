@@ -106,7 +106,6 @@ namespace SlackMonitoroing
             }
             catch (Exception ex)
             {
-
                 throw;
             }
         }

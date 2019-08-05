@@ -27,13 +27,14 @@ namespace SlackMonitoroing
                 SlackWebhookUrl = monitor.SlackWebhookUrl
             });
 
-            return "";
+            return "200";
         }
-
+        
         public static void PostToSlackAsync(DbMonitorModel model)
         {
             string request = ($"Function Name: {model.FunctionName}, Type of Error: {model.TypeOfError}, " +
                 $" Type of Query: {model.TypeOfQuery},  Timer: {model.Timer}");
+
             string requestJson = $"{{'text': '{request}'}}";
 
             using (var client = new HttpClient())
